@@ -18,7 +18,7 @@ class Student:
 
     def to_snack(self, ctx):
         self._start_action(SnackAction, "snack", ctx)
-
+ 
     def to_game(self, ctx):
         self._start_action(GameAction, "game", ctx)
 
