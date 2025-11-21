@@ -1,5 +1,6 @@
 from actions.SecretAction import SecretAction
 
+
 class SleepAction(SecretAction):
     def __init__(self, sleep_time=2.0, point=15):
         super().__init__(name="졸기", point=point)
