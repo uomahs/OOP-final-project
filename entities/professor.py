@@ -1,4 +1,5 @@
 import random
+import pygame
 
 class Professor:
     state: str          # 현재 교수님 상태
@@ -54,7 +55,7 @@ class Professor:
         self.patrol_timer = duration
         print(f"(발소리) 실습 시간! 교수님이 가까이 옵니다. ({duration:.1f}초간 순찰)")
 
-    def stop(self):
+    def professor_stop(self):
         self.state = "Writing"
         self.write_timer = random.uniform(self.min_write, self.max_write)
         print("교수님이 다시 수업을 시작합니다!")
