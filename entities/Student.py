@@ -2,6 +2,12 @@ from typing import Literal
 import random
 from typing import Optional
 
+from actions.sleepAction import SleepAction
+from actions.snackAction import SnackAction
+from actions.GameAction import GameAction
+from actions.SecreatAction import SecretAction
+
+
 class Student:
     current: Literal["sleep", "snack", "game"]
     total_score: int
@@ -31,7 +37,7 @@ class Student:
         self.current_action= action
         self.current= name
         action.start(ctx)
-        
+         
         self.remaining_missions.remove(action_cls)
 
     def start_random_mission(self, ctx):
@@ -47,5 +53,3 @@ class Student:
             
     def update_score(self, point):
         self.total_score+= point
-    
-   
