@@ -1,12 +1,13 @@
 from typing import Literal
 import random
+from typing import Optional
 
 class Student:
     current: Literal["sleep", "snack", "game"]
     total_score: int
-    current_action: 'SecretAction' | None 
+    current_action: Optional["SecretAction"] = None
     remaining_missions: list
-
+    
     def __init__(self):
         self.total_score = 0
         self.current_action = None
