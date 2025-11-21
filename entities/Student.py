@@ -2,10 +2,10 @@ from typing import Literal
 import random
 from typing import Optional
 
-from actions.sleepAction import SleepAction
-from actions.snackAction import SnackAction
+from actions.SleepAction import SleepAction
+from actions.SnackAction import SnackAction
 from actions.GameAction import GameAction
-from actions.SecreatAction import SecretAction
+from actions.SecretAction import SecretAction
 
 
 class Student:
