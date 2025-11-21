@@ -1,4 +1,4 @@
-from specialAction import SecretAction
+from SecreatAction import SecretAction
 import pygame
 
 class SnackAction(SecretAction):
