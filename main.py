@@ -6,31 +6,22 @@ import sys
 BASE_DIR = os.path.dirname(__file__)          # OOP-final-project 폴더
 IMAGE_PATH = os.path.join(BASE_DIR, "images", "background.png")
 
-
 def main():
     # Pygame 초기화
     pygame.init()
+    clock = pygame.time.Clock()
 
     # 이미지 로드
-    try:
-        image = pygame.image.load(IMAGE_PATH)
-    except pygame.error as e:
-        print(f"[ERROR] 이미지 로드 실패: {IMAGE_PATH}")
-        print(e)
-        pygame.quit()
-        sys.exit(1)
+    image = pygame.image.load(IMAGE_PATH)
 
     # 이미지 크기에 맞춰 창 생성
     width, height = image.get_size()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("교수님 몰래 @@하기")
-
-    clock = pygame.time.Clock()
+    
     running = True
-
-    # 메인 루프
     while running:
-        clock.tick(60)  # FPS 60
+        clock.tick(60)  
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -44,7 +35,6 @@ def main():
 
     pygame.quit()
     sys.exit()
-
 
 if __name__ == "__main__":
     main()
