@@ -11,6 +11,7 @@ class SecretAction:
         self.total_hits = total_hits      
         self.current_hits = 0             
         self.elapsed_acc = 0.0 # 누적 시간    
+        self.time_per_hit = 0.2
     
     def start(self, ctx): 
         if not self.is_complete():
