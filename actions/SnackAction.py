@@ -1,4 +1,4 @@
-from SecretAction import SecretAction
+from actions.SecretAction import SecretAction
 
 class SnackAction(SecretAction):
     def __init__(self):
