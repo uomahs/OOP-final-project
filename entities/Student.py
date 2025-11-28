@@ -7,7 +7,6 @@ from actions.SnackAction import SnackAction
 from actions.GameAction import GameAction
 from actions.SecretAction import SecretAction
 
-
 def draw_mission_bar(surface, x, y, width, height, progress,
                      tube_color=(90, 50, 30),
                      inner_color=(40, 20, 10),
