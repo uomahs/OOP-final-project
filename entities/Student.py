@@ -36,8 +36,7 @@ class Student:
         self.current= "normal"
         self.remaining_missions = [SleepAction, SnackAction, GameAction]
         self.target_action: SecretAction | None = None
-        
-        
+           
         # 사진 크기 변경 필요?
         image_paths = {
             'normal': 'images/student.png',
