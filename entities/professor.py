@@ -1,5 +1,9 @@
 import random
 import pygame
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+IMAGE_DIR = os.path.join(BASE_DIR, "images")
 
 class Professor:
     state: str          # 현재 교수님 상태
@@ -19,8 +23,11 @@ class Professor:
         self.write_timer = random.uniform(self.min_write, self.max_write) # 필기 지속 시간
 
         # 이미지 로드
-        self.image_writing = pygame.image.load("OOP-final-project/images/professorBack.png")
-        self.image_watching = pygame.image.load("OOP-final-project/images/professorFront.png")
+        back_path = os.path.join(IMAGE_DIR, "professorBack.png")
+        front_path = os.path.join(IMAGE_DIR, "professorFront.png")
+
+        self.image_writing = pygame.image.load(back_path)
+        self.image_watching = pygame.image.load(front_path)
         self.current_image = self.image_writing #현재 이미지
 
         self.rect = self.current_image.get_rect()
