@@ -126,8 +126,8 @@ class Ending:
             self.rect = img.get_rect(topleft=(btn_x, btn_y))
             screen.blit(img, self.rect.topleft)
 
-        elif self.type == "class_end":  # 모든 미션 성공시 수업 종료 출력
-            text = self.font.render("수업이 종료되었습니다!", True, (200, 255, 200))
+        elif self.type == "class_end": # 모든 미션 성공시 수업 종료 출력
+            text = self.font.render("Class has ended!", True, (200, 255, 200))
             screen.blit(text, (150, 200))
 
         else:
