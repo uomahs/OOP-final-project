@@ -87,7 +87,19 @@ def main():
 
             if result == "caught":
                 ending = Ending("mission_fail")
-                game_state = "ENDING"
+                outcome = ending.play(screen)
+
+                if outcome == "retry":
+                    student = Student(width, height)
+                    prof_x = int(width * 0.35)
+                    prof_y = int(height * 0.33)
+                    professor = Professor(prof_x, prof_y)
+                    game_state = "TITLE"
+                    continue
+                
+                elif outcome == "quit":
+                    running = False
+                    continue
 
             screen.blit(background_img, (0,0))
             professor.draw(screen)
