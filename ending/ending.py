@@ -8,12 +8,21 @@ class Ending:
         self.small_font = pygame.font.Font(None, 32)
         self.button_rect = None  # 다시하기 버튼 위치 저장
 
-        base_dir = os.path.dirname(__file__)
+        base_dir = os.path.dirname(os.path.dirname(__file__)) #파일 루트까지 올리기 위해
         img_dir = os.path.join(base_dir, "images")
 
         self.restart_normal = pygame.image.load(os.path.join(img_dir, "restartbutton.png"))
         self.restart_hover = pygame.image.load(os.path.join(img_dir, "restartHover.png"))
         self.restart_click = pygame.image.load(os.path.join(img_dir, "restartClick.png"))
+
+        btn_w, btn_h = self.restart_normal.get_size()
+        target_width = 350
+        ratio = target_width / btn_w
+        new_size = (target_width, int(btn_h * ratio))
+
+        self.restart_normal = pygame.transform.scale(self.restart_normal, new_size)
+        self.restart_hover  = pygame.transform.scale(self.restart_hover,  new_size)
+        self.restart_click  = pygame.transform.scale(self.restart_click,  new_size)
 
         self.restart_img = self.restart_normal
         self.is_mouse_down = False
@@ -65,11 +74,11 @@ class Ending:
 
     def draw(self, screen):
         if self.type == "mission_success": # 미션 하나 성공-> 텍스트만
-            text = self.font.render("이번 미션 성공!", True, (255, 255, 255))
+            text = self.font.render("mission success!", True, (255, 255, 255))
             screen.blit(text, (200, 200))
 
         elif self.type == "mission_fail": #미션 실패-> 텍스트, 다시하기 버튼
-            text = self.font.render("미션 실패!", True, (255, 100, 100))
+            text = self.font.render("mission failed!", True, (255, 100, 100))
             screen.blit(text, (200, 150))
 
             btn_w, btn_h = self.restart_img.get_size()
