@@ -11,9 +11,9 @@ class Ending:
         base_dir = os.path.dirname(__file__)
         img_dir = os.path.join(base_dir, "images")
 
-        self.restart_normal = pygame.image.load(os.path.join(base_dir, "restartbutton.png"))
-        self.restart_hover = pygame.image.load(os.path.join(base_dir, "restartHover.png"))
-        self.restart_click = pygame.image.load(os.path.join(base_dir, "restartClick.png"))
+        self.restart_normal = pygame.image.load(os.path.join(img_dir, "restartbutton.png"))
+        self.restart_hover = pygame.image.load(os.path.join(img_dir, "restartHover.png"))
+        self.restart_click = pygame.image.load(os.path.join(img_dir, "restartClick.png"))
 
         self.restart_img = self.restart_normal
         self.is_mouse_down = False
