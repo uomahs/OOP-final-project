@@ -4,6 +4,7 @@ import sys
 
 from SimpleButton import SimpleButton
 from entities.Student import Student
+from entities.professor import Professor
 
 # 경로 설정
 BASE_DIR = os.path.dirname(__file__)          # OOP-final-project 폴더
@@ -37,6 +38,10 @@ def main():
     width, height = background_img.get_size()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("교수님 몰래 @@하기")
+
+    prof_x = int(width * 0.35)
+    prof_y = int(height * 0.33)
+    professor = Professor(prof_x, prof_y)
     
     # SimpleButton 객체 생성
     startbutton = SimpleButton(
@@ -77,7 +82,9 @@ def main():
             keys= pygame.key.get_pressed()
                 
             student.update(dt, keys)
+            professor.update(dt)
             screen.blit(background_img, (0,0))
+            professor.draw(screen)
             student.draw(screen)
             
             mission_name = student.get_mission_name()
