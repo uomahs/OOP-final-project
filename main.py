@@ -21,8 +21,8 @@ def main():
     pygame.init()
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((800, 600))
-    width, height = screen.get_size()
-    student = Student(width, height)
+    student_w, student_h = screen.get_size()
+    student = Student(student_w, student_h)
 
     # 이미지 로드
     background_img = pygame.image.load(BACKGROUND_PATH)
@@ -36,12 +36,12 @@ def main():
     startbutton_clk_img = pygame.transform.scale(startbutton_clk_img, (300, 250))
 
     # 이미지 크기에 맞춰 창 생성
-    width, height = background_img.get_size()
-    screen = pygame.display.set_mode((width, height))
+    bg_w, bg_h = background_img.get_size()
+    screen = pygame.display.set_mode((bg_w, bg_h))
     pygame.display.set_caption("교수님 몰래 @@하기")
 
-    prof_x = int(width * 0.35)
-    prof_y = int(height * 0.33)
+    prof_x = int(bg_w * 0.35)
+    prof_y = int(bg_h * 0.33)
     professor = Professor(prof_x, prof_y)
     
     # SimpleButton 객체 생성
@@ -90,9 +90,9 @@ def main():
                 outcome = ending.play(screen)
 
                 if outcome == "retry":
-                    student = Student(width, height)
-                    prof_x = int(width * 0.35)
-                    prof_y = int(height * 0.33)
+                    student = Student(student_w, student_h)
+                    prof_x = int(bg_w * 0.35)
+                    prof_y = int(bg_h * 0.33)
                     professor = Professor(prof_x, prof_y)
                     game_state = "TITLE"
                     continue
