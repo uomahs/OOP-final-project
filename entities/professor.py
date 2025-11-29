@@ -30,6 +30,16 @@ class Professor:
         self.image_watching = pygame.image.load(front_path)
         self.current_image = self.image_writing #현재 이미지
 
+        #이미지 사이즈 조정
+        target_height = 220
+        orig_w, orig_h = self.image_writing.get_size()
+        ratio = target_height / orig_h
+        new_size = (int(orig_w * ratio), int(orig_h * ratio))
+
+        self.image_writing = pygame.transform.scale(self.image_writing, new_size)
+        self.image_watching = pygame.transform.scale(self.image_watching, new_size)
+        self.current_image = self.image_writing
+                                                     
         self.rect = self.current_image.get_rect()
         self.rect.center = (self.x, self.y)
 
