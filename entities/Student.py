@@ -53,7 +53,6 @@ class Student:
             new_height = int(h * ratio)
             self.images[key] = pygame.transform.scale(temp_img, (target_width, new_height))
             
-            
         center_x = screen_width // 2 + 140
         center_y = screen_height // 2 + 200  
         
