@@ -31,7 +31,7 @@ class Professor:
         self.current_image = self.image_writing #현재 이미지
 
         #이미지 사이즈 조정
-        target_height = 220
+        target_height = 170
         orig_w, orig_h = self.image_writing.get_size()
         ratio = target_height / orig_h
         new_size = (int(orig_w * ratio), int(orig_h * ratio))
@@ -43,9 +43,34 @@ class Professor:
         self.rect = self.current_image.get_rect()
         self.rect.center = (self.x, self.y)
 
-    def update(self, dt):
+        self.caught = False
+
+    def update(self, dt, student=None):
+        self.caught = False
+
+        #감시 중 + student 미션 수행 체크
+        if self.state == "Watching" and student is not None:
+            if student.current_action is not None and student.current_action.is_active:
+                print("교수님께 적발되었습니다! 미션 실패!")
+
+                ctx = {
+                    "student": student,
+                    "sleep_pressed": False,
+                    "snack_pressed": False,
+                    "game_pressed": False
+                }
+
+                student.current_action.caught(ctx)
+
+                student.current_action = None
+                student.set_state("normal")
+
+                self.caught = True
+                return "caught"
+        
         # 감시 중일 때 (Watching)
         if self.state == "Watching":
+            # 감시 시간 감소
             self.watch_timer -= dt
             if self.watch_timer <= 0:
                 self.professor_stop()
@@ -56,6 +81,9 @@ class Professor:
             if self.write_timer <= 0:
                duration = random.uniform(2.0, 4.0)
                self.start_watching(duration)
+
+        #잡지 못했으면 None
+        return None
 
     def is_watching(self) -> bool:
         return self.state == "Watching"
