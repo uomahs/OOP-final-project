@@ -5,6 +5,7 @@ import sys
 from SimpleButton import SimpleButton
 from entities.Student import Student
 from entities.professor import Professor
+from ending.ending import Ending
 
 # 경로 설정
 BASE_DIR = os.path.dirname(__file__)          # OOP-final-project 폴더
@@ -82,7 +83,12 @@ def main():
             keys= pygame.key.get_pressed()
                 
             student.update(dt, keys)
-            professor.update(dt)
+            result = professor.update(dt, student)
+
+            if result == "caught":
+                ending = Ending("mission_fail")
+                game_state = "ENDING"
+
             screen.blit(background_img, (0,0))
             professor.draw(screen)
             student.draw(screen)
