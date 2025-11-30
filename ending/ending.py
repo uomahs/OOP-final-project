@@ -81,8 +81,7 @@ class Ending:
                         return "retry"
                     
                 elif self.type == "mission_success":
-                    if (event.type == pygame.KEYDOWN or
-                    (event.type == pygame.MOUSEBUTTONUP and event.button == 1)):
+                    if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                         return "continue"
                     
                 elif self.type == "class_end":
@@ -98,17 +97,20 @@ class Ending:
     def draw(self, screen):
 
         if self.type == "mission_success":  # 미션 하나 성공 -> 텍스트만
-            text = self.font.render("Mission Completed!", True, (0, 255, 0))
-            screen.blit(text, (350, 180))
+            text = self.font.render("Mission Completed!", True, (0, 0, 0))
+            screen.blit(text, (310, 180))
+
+            guide = self.font.render("Click to continue.", True, (0, 0, 0))
+            screen.blit(guide, (330, 240))
 
         elif self.type == "mission_fail":   # 미션 실패 -> 텍스트 + 다시하기 버튼
-            text= self.font.render("Mission Failed!", True, (255, 100, 100))
+            text= self.font.render("Mission Failed!", True, (255, 0, 0))
             screen.blit(text, (350, 180))
             self.draw_restart_button(screen)
 
         elif self.type == "class_end": # 모든 미션 성공시 수업 종료 출력
-            text = self.font.render("Class has ended!", True, (0, 255, 0))
-            screen.blit(text, (350, 180))
+            text = self.font.render("Class has ended!", True, (50, 205, 50))
+            screen.blit(text, (340, 180))
             self.draw_restart_button(screen)
 
         else:
