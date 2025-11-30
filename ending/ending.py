@@ -24,9 +24,6 @@ class Ending:
         self.restart_hover  = pygame.image.load(os.path.join(img_dir, "restartHover.png"))
         self.restart_click  = pygame.image.load(os.path.join(img_dir, "restartClick.png"))
 
-        bg_w, bg_h = self.background_img.get_size()
-        screen = pygame.display.set_mode((bg_w, bg_h))
-
         # 공통 크기로 스케일
         button_size = (360, 350)
 
@@ -35,7 +32,6 @@ class Ending:
         self.restart_click  = pygame.transform.scale(self.restart_click,  button_size)
 
     def handle_button_event(self, event):
-        """SimpleButton.handleEvent와 거의 동일한 버튼 상태 머신"""
         if self.rect is None:
             return False
 
@@ -65,15 +61,13 @@ class Ending:
 
         return False
 
-    def play(self, screen):
-        """엔딩 화면 루프"""
-        
+    def play(self, screen):        
         running = True
         clock = pygame.time.Clock()
 
         while running:
             screen.blit(self.background_img, (0,0))
-            self.draw(screen)  # 여기서 self.rect 갱신됨
+            self.draw(screen)  # 여기서 self.rect 갱신
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -92,9 +86,9 @@ class Ending:
                         return "continue"
                     
                 elif self.type == "class_end":
-                    if (event.type == pygame.KEYDOWN or
-                        (event.type == pygame.MOUSEBUTTONUP and event.button == 1)):
-                        return "quit"
+                    clicked = self.handle_button_event(event)
+                    if clicked:
+                        return "retry"
 
             pygame.display.flip()
             clock.tick(60)
@@ -104,35 +98,35 @@ class Ending:
     def draw(self, screen):
 
         if self.type == "mission_success":  # 미션 하나 성공 -> 텍스트만
-            text = self.font.render("Mission Completed!", True, (255, 255, 255))
-            screen.blit(text, (305, 180))
+            text = self.font.render("Mission Completed!", True, (0, 255, 0))
+            screen.blit(text, (350, 180))
 
         elif self.type == "mission_fail":   # 미션 실패 -> 텍스트 + 다시하기 버튼
             text= self.font.render("Mission Failed!", True, (255, 100, 100))
-            screen.blit(text, (305, 180))
-
-            # 버튼 위치 계산 (가운데 정렬)
-            base_img = self.restart_normal  # 크기 기준용
-            btn_w, btn_h = base_img.get_size()
-            btn_x = (screen.get_width() - btn_w) // 2
-            btn_y = 280
-
-            # 상태에 따라 그릴 이미지 결정 (SimpleButton.draw()와 동일)
-            if self.state == Ending.STATE_ACTIVE:
-                img = self.restart_click
-            elif self.state == Ending.STATE_HOVER:
-                img = self.restart_hover
-            else:
-                img = self.restart_normal
-
-            # rect 업데이트 (충돌 체크용)
-            self.rect = img.get_rect(topleft=(btn_x, btn_y))
-            screen.blit(img, self.rect.topleft)
+            screen.blit(text, (350, 180))
+            self.draw_restart_button(screen)
 
         elif self.type == "class_end": # 모든 미션 성공시 수업 종료 출력
-            text = self.font.render("Class has ended!", True, (200, 255, 200))
-            screen.blit(text, (305, 180))
+            text = self.font.render("Class has ended!", True, (0, 255, 0))
+            screen.blit(text, (350, 180))
+            self.draw_restart_button(screen)
 
         else:
             text = self.font.render("알 수 없는 엔딩", True, (255, 255, 255))
             screen.blit(text, (200, 200))
+            
+    def draw_restart_button(self, screen):
+        base_img = self.restart_normal
+        btn_w, btn_h = base_img.get_size()
+        btn_x = (screen.get_width() - btn_w) // 2
+        btn_y = 280
+
+        if self.state == Ending.STATE_ACTIVE:
+            img = self.restart_click
+        elif self.state == Ending.STATE_HOVER:
+            img = self.restart_hover
+        else:
+            img = self.restart_normal
+
+        self.rect = img.get_rect(topleft=(btn_x, btn_y))
+        screen.blit(img, self.rect.topleft)
