@@ -36,7 +36,6 @@ class Student:
         self.remaining_missions = [SleepAction, SnackAction, GameAction]
         self.target_action: SecretAction | None = None
            
-        # 사진 크기 변경 필요?
         image_paths = {
             'normal': 'images/student.png',
             'snack':  'images/snack.png',
@@ -137,7 +136,14 @@ class Student:
                     self.remaining_missions.remove(action_cls)
                     # 성공 후 다음 미션으로 넘어감
                     self.stop_current_action(ctx)
-                    self.next_mission()
+                    if not self.remaining_missions:
+                        self.target_action = None
+                        return "all_cleared" 
+                    else:
+                        self.next_mission()
+                        return "mission_complete" 
+        
+        return None 
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
