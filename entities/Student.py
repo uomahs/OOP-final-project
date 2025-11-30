@@ -63,6 +63,10 @@ class Student:
         
         self.next_mission()
 
+        # SnackAction일때만 추가되는 과자 이미지
+        self.snackicon_img = pygame.image.load('images/snackicon.png')
+        self.snackicon_img = pygame.transform.scale(self.snackicon_img, (140, 140))
+
     def next_mission(self):
         if self.remaining_missions:
             mission_cls = random.choice(self.remaining_missions)
@@ -137,6 +141,11 @@ class Student:
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+
+        # 현재 미션이 '과자먹기'라면 과자 이미지 넣기
+        if isinstance(self.target_action, SnackAction):
+            screen.blit(self.snackicon_img, (680, 440))
+
         if self.target_action:
             screen_w, screen_h = screen.get_size()
             bar_w = 500

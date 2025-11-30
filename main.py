@@ -40,9 +40,7 @@ def main():
     screen = pygame.display.set_mode((bg_w, bg_h))
     pygame.display.set_caption("교수님 몰래 @@하기")
 
-    prof_x = int(bg_w * 0.35)
-    prof_y = int(bg_h * 0.33)
-    professor = Professor(prof_x, prof_y)
+    professor = Professor(350, 216)
     
     # SimpleButton 객체 생성
     startbutton = SimpleButton(
@@ -69,18 +67,18 @@ def main():
 
             if game_state == "TITLE":
                 if startbutton.handleEvent(event):
-                    print("게임 시작!")
+                    print("게임 시작!")     
                     game_state = "PLAY"
 
         # 화면에 이미지 그리기
         if game_state == "TITLE":
             screen.blit(background_img, (0, 0))
             screen.blit(title_img, (220, -10))
-            startbutton.draw()
+            startbutton.draw()    
             
         elif game_state == "PLAY":
             dt= clock.get_time()/ 1000.0
-            keys= pygame.key.get_pressed()
+            keys= pygame.key.get_pressed()      
                 
             student.update(dt, keys)
             result = professor.update(dt, student)
@@ -91,9 +89,7 @@ def main():
 
                 if outcome == "retry":
                     student = Student(student_w, student_h)
-                    prof_x = int(bg_w * 0.35)
-                    prof_y = int(bg_h * 0.33)
-                    professor = Professor(prof_x, prof_y)
+                    professor = Professor(350, 216)
                     game_state = "TITLE"
                     continue
                 

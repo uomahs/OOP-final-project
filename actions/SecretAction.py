@@ -51,7 +51,7 @@ class SecretAction:
         # 5. 완료 체크
         if self.is_complete():
             self.stop(ctx) # 완료되면 자동으로 멈춤
-            print(f"🎉 {self.name} 미션 성공!")
+            print(f" {self.name} 미션 성공!")
 
     def caught(self, ctx): 
         self.stop(ctx)
