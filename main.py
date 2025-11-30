@@ -108,8 +108,9 @@ def main():
                 text_surface = font.render(mission_text, True, (255, 0, 0)) 
                 screen.blit(text_surface, (50, 50))
             else:
-                clear_text = font.render("ALL MISSION CLEAR!", True, (0, 255, 0))
-                screen.blit(clear_text, (250, 300))          
+                text.font = pygame.font.SysFont("malgungothic", 60, True)
+                text = font.render("ALL MISSION CLEAR!", True, (0, 255, 0))
+                screen.blit(text, (310, 180))          
 
         pygame.display.flip()
 
