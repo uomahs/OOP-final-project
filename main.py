@@ -40,9 +40,7 @@ def main():
     screen = pygame.display.set_mode((bg_w, bg_h))
     pygame.display.set_caption("교수님 몰래 @@하기")
 
-    prof_x = int(bg_w * 0.35)
-    prof_y = int(bg_h * 0.33)
-    professor = Professor(prof_x, prof_y)
+    professor = Professor(350, 216)
 
     # SimpleButton 객체 생성
     startbutton = SimpleButton(
