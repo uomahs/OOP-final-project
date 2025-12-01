@@ -134,8 +134,6 @@ class Student:
                 action_cls = type(self.current_action)
                 if action_cls in self.remaining_missions:
                     self.remaining_missions.remove(action_cls)
-                    # 성공 후 다음 미션으로 넘어감
-                    self.stop_current_action(ctx)
                     if not self.remaining_missions:
                         self.target_action = None
                         return "all_cleared" 
@@ -159,12 +157,6 @@ class Student:
             bar_x = (screen_w - bar_w) // 2 + 30
             bar_y = screen_h - 60
             draw_mission_bar(screen, bar_x, bar_y, bar_w, bar_h, progress=self.target_action.progress)
-            
-    def stop_current_action(self, ctx):
-        if self.current_action:
-            self.current_action.stop(ctx)
-        self.current_action = None
-        self.set_state('normal')
 
     def to_sleep(self, ctx):
         self._start_action(SleepAction, "sleep", ctx)
